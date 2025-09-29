@@ -1,5 +1,4 @@
 -- Description: Create external tables for bronze dataset in BigQuery
--- please do not forget to replace the bucket path
 
 CREATE EXTERNAL TABLE IF NOT EXISTS `healthcare-de-project.bronze_dataset.departments_ha` 
 OPTIONS (
