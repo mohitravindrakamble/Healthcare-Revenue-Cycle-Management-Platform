@@ -8,7 +8,7 @@ spark = SparkSession.builder \
 # configure variables
 BUCKET_NAME = "healthcare-de-project-bucket-09282025"
 CPT_BUCKET_PATH = f"gs://{BUCKET_NAME}/landing/cptcodes/*.csv"
-BQ_TABLE = "avd-databricks-demo.bronze_dataset.cpt_codes"
+BQ_TABLE = "healthcare-de-project.bronze_dataset.cpt_codes"
 TEMP_GCS_BUCKET = f"{BUCKET_NAME}/temp/"
 
 # read from cpt

@@ -22,12 +22,12 @@ GOLD_QUERY = read_sql_file(SQL_FILE_PATH_3)
 
 # Define default arguments
 ARGS = {
-    "owner": "Compute Engine default service account",
+    "owner": "Mohit Kamble",
     "start_date": None,
     "depends_on_past": False,
-    "email": ["703844156661-compute@developer.gserviceaccount.com"],
     "email_on_failure": False,
     "email_on_retry": False,
+    "email": ["mohitkamblework@gmail.com"],
     "email_on_success": False,
     "retries": 1,
     "retry_delay": timedelta(minutes=5)
