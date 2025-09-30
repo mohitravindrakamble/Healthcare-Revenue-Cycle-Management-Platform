@@ -17,7 +17,7 @@ spark = SparkSession.builder.appName("HospitalAMySQLToLanding").getOrCreate()
 
 
 # Google Cloud Storage (GCS) Configuration
-GCS_BUCKET = "healthcare-de-project-bucket-09272025"
+GCS_BUCKET = "healthcare-de-project-bucket-09282025"
 HOSPITAL_NAME = "hospital-a"
 LANDING_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/"
 ARCHIVE_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/archive/"
