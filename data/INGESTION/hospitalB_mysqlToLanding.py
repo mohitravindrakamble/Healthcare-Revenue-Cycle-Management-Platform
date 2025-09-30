@@ -4,17 +4,12 @@ from pyspark.sql import SparkSession
 import datetime
 import json
 
-
 # Initialize GCS & BigQuery Clients
 storage_client = storage.Client()
 bq_client = bigquery.Client()
 
-
-
 # Initialize Spark Session
 spark = SparkSession.builder.appName("HospitalAMySQLToLanding").getOrCreate()
-
-
 
 # Google Cloud Storage (GCS) Configuration
 GCS_BUCKET = "healthcare-de-project-bucket-09282025"
@@ -23,29 +18,23 @@ LANDING_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/"
 ARCHIVE_PATH = f"gs://{GCS_BUCKET}/landing/{HOSPITAL_NAME}/archive/"
 CONFIG_FILE_PATH = f"gs://{GCS_BUCKET}/configs/load_config.csv"
 
-
-
 # BigQuery Configuration
-BQ_PROJECT = "heathcare-de-project"
+BQ_PROJECT = "healthcare-de-project"
 BQ_AUDIT_TABLE = f"{BQ_PROJECT}.temp_dataset.audit_log"
 BQ_LOG_TABLE = f"{BQ_PROJECT}.temp_dataset.pipeline_logs"
-BQ_TEMP_PATH = f"{GCS_BUCKET}/temp/"
-
+BQ_TEMP_PATH = f"{GCS_BUCKET}/temp/"  
 
 # MySQL Configuration
 MYSQL_CONFIG = {
-    "url": "jdbc:mysql://34.46.142.137:3306/hospital_b_db?useSSL=false&allowPublicKeyRetrieval=true",
+    "url": "jdbc:mysql://34.27.65.84:3306/hospital_b_db?useSSL=false&allowPublicKeyRetrieval=true",
     "driver": "com.mysql.cj.jdbc.Driver",
     "user": "myuser",
     "password": "Mohitleroy@4554"
 }
 
-
-
 ##------------------------------------------------------------------------------------------------------------------##
 # Logging Mechanism
 log_entries = []  # Stores logs before writing to GCS
-
 
 def log_event(event_type, message, table=None):
     """Log an event and store it in the log list"""
@@ -57,9 +46,6 @@ def log_event(event_type, message, table=None):
     }
     log_entries.append(log_entry)
     print(f"[{log_entry['timestamp']}] {event_type} - {message}")  # Print for visibility
-
-    
-
     
 def save_logs_to_gcs():
     """Save logs to a JSON file and upload to GCS"""
@@ -86,12 +72,9 @@ def save_logs_to_bigquery():
             .option("temporaryGcsBucket", BQ_TEMP_PATH) \
             .mode("append") \
             .save()
-        print("✅ Logs stored in BigQuery for future analysis")    
+        print("✅ Logs stored in BigQuery for future analysis")
     
-
-    
-##------------------------------------------------------------------------------------------------------------------##        
-    
+##------------------------------------------------------------------------------------------------------------------##
 
 # Function to Move Existing Files to Archive
 def move_existing_files_to_archive(table):
@@ -118,12 +101,8 @@ def move_existing_files_to_archive(table):
         source_blob.delete()
 
         log_event("INFO", f"Moved {file} to {archive_path}", table=table)
-
         
-        
-        
-##------------------------------------------------------------------------------------------------------------------##        
-        
+##------------------------------------------------------------------------------------------------------------------##
 
 # Function to Get Latest Watermark from BigQuery Audit Table
 def get_latest_watermark(table_name):
@@ -137,12 +116,8 @@ def get_latest_watermark(table_name):
     for row in result:
         return row.latest_timestamp if row.latest_timestamp else "1900-01-01 00:00:00"
     return "1900-01-01 00:00:00"
-    
-
-        
 
 ##------------------------------------------------------------------------------------------------------------------##
-
 
 # Function to Extract Data from MySQL and Save to GCS
 def extract_and_save_to_landing(table, load_type, watermark_col):
@@ -189,29 +164,20 @@ def extract_and_save_to_landing(table, load_type, watermark_col):
         log_event("ERROR", f"Error processing {table}: {str(e)}", table=table)
 ##------------------------------------------------------------------------------------------------------------------##
 
-
-
-
 # Function to Read Config File from GCS
 def read_config_file():
     df = spark.read.csv(CONFIG_FILE_PATH, header=True)
     log_event("INFO", "✅ Successfully read the config file")
     return df
 
-
-
 # read config file
 config_df = read_config_file()
-
 
 for row in config_df.collect():
     if row["is_active"] == '1' and row["datasource"] == "hospital_b_db": 
         db, src, table, load_type, watermark, _, targetpath = row
         move_existing_files_to_archive(table)
         extract_and_save_to_landing(table, load_type, watermark)
-
-
+        
 save_logs_to_gcs()
 save_logs_to_bigquery()
-
-

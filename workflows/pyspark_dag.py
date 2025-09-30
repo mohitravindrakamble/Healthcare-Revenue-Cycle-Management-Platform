@@ -15,28 +15,28 @@ REGION = "us-east1"
 CLUSTER_NAME = "my-demo-cluster2"
 COMPOSER_BUCKET = "us-central1-demo-composer-04b9179f-bucket"
 
-GCS_JOB_FILE_1 = f"gs://us-central1-demo-composer-04b9179f-bucket/data/INGESTION/hospitalA_mysqlToLanding.py"
+GCS_JOB_FILE_1 = f"gs://{COMPOSER_BUCKET}/data/INGESTION/hospitalA_mysqlToLanding.py"
 PYSPARK_JOB_1 = {
     "reference": {"project_id": PROJECT_ID},
     "placement": {"cluster_name": CLUSTER_NAME},
     "pyspark_job": {"main_python_file_uri": GCS_JOB_FILE_1},
 }
 
-GCS_JOB_FILE_2 = f"gs://us-central1-demo-composer-04b9179f-bucket/data/INGESTION/hospitalB_mysqlToLanding.py"
+GCS_JOB_FILE_2 = f"gs://{COMPOSER_BUCKET}/data/INGESTION/hospitalB_mysqlToLanding.py"
 PYSPARK_JOB_2 = {
     "reference": {"project_id": PROJECT_ID},
     "placement": {"cluster_name": CLUSTER_NAME},
     "pyspark_job": {"main_python_file_uri": GCS_JOB_FILE_2},
 }
 
-GCS_JOB_FILE_3 = f"gs://us-central1-demo-composer-04b9179f-bucket/data/INGESTION/claims.py"
+GCS_JOB_FILE_3 = f"gs://{COMPOSER_BUCKET}/data/INGESTION/claims.py"
 PYSPARK_JOB_3 = {
     "reference": {"project_id": PROJECT_ID},
     "placement": {"cluster_name": CLUSTER_NAME},
     "pyspark_job": {"main_python_file_uri": GCS_JOB_FILE_3},
 }
 
-GCS_JOB_FILE_4 = f"gs://us-central1-demo-composer-04b9179f-bucket/data/INGESTION/cpt_codes.py"
+GCS_JOB_FILE_4 = f"gs://{COMPOSER_BUCKET}/data/INGESTION/cpt_codes.py"
 PYSPARK_JOB_4 = {
     "reference": {"project_id": PROJECT_ID},
     "placement": {"cluster_name": CLUSTER_NAME},
@@ -45,12 +45,12 @@ PYSPARK_JOB_4 = {
 
 
 ARGS = {
-    "owner": "Compute Engine default service account",
+    "owner": "Mohit Kamble",
     "start_date": None,
     "depends_on_past": False,
-    "email": ["703844156661-compute@developer.gserviceaccount.com"],
     "email_on_failure": False,
     "email_on_retry": False,
+    "email": ["mohitkamblework@gmail.com"],
     "email_on_success": False,
     "retries": 1,
     "retry_delay": timedelta(minutes=5)
