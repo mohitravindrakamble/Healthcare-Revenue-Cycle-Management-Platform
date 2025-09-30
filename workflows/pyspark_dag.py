@@ -45,12 +45,11 @@ PYSPARK_JOB_4 = {
 
 
 ARGS = {
-    "owner": "Compute Engine default service account",
+    "owner": "airflow",
     "start_date": None,
     "depends_on_past": False,
     "email_on_failure": False,
     "email_on_retry": False,
-    "email": ["703844156661-compute@developer.gserviceaccount.com"],
     "email_on_success": False,
     "retries": 1,
     "retry_delay": timedelta(minutes=5)
