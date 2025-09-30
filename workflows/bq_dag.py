@@ -22,9 +22,10 @@ GOLD_QUERY = read_sql_file(SQL_FILE_PATH_3)
 
 # Define default arguments
 ARGS = {
-    "owner": "airflow",
+    "owner": "Compute Engine default service account",
     "start_date": None,
     "depends_on_past": False,
+    "email": ["703844156661-compute@developer.gserviceaccount.com"],
     "email_on_failure": False,
     "email_on_retry": False,
     "email_on_success": False,
