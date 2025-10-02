@@ -23,7 +23,7 @@
   </p>
 
   <h2>🚀 System Architecture</h2>
-  <img src="./Assets/system_architecture.png" alt="System Architecture">
+  <img src="./assets/system_architecture.png" alt="System Architecture">
 
   <h2>📂 Project Structure</h2>
   <pre><code>/
@@ -103,15 +103,15 @@ This project leverages multiple GCP services to build an efficient and scalable 
   <h2>📊 Dashboard Previews</h2>
   <p><b><h4>• Live Dashboard Preview:</b> <a href="https://lookerstudio.google.com/u/0/reporting/e5f9f6e0-b6d6-45f9-85db-80210c0eadb0/page/RFDaF" target="_blank">Click here to view</a></p></h4>
   <h3>• Dashboard Overview Page</h3>
-  <img src="./Assets/dashboard_overview.png" alt="Overview Dashboard">
+  <img src="./assets/dashboard_overview.png" alt="Overview Dashboard">
   <h3>• Department Revenue Analytics Page</h3>
-  <img src="./Assets/dashboard_department.png" alt="Department Dashboard">
+  <img src="./assets/dashboard_department.png" alt="Department Dashboard">
   <h3>• Provider Performance Analytics Page</h3>
-  <img src="./Assets/dashboard_provider.png" alt="Provider Dashboard">
+  <img src="./assets/dashboard_provider.png" alt="Provider Dashboard">
   <h3>• Payor Revenue Analytics Page</h3>
-  <img src="./Assets/dashboard_payor.png" alt="Payor Dashboard">
+  <img src="./assets/dashboard_payor.png" alt="Payor Dashboard">
   <h3>• Patient History Analytics Page</h3>
-  <img src="./Assets/dashboard_patient.png" alt="Patient Dashboard">
+  <img src="./assets/dashboard_patient.png" alt="Patient Dashboard">
 
  <h2>📈 Airflow DAGs (Workflows)</h2>
 <p>Below are the three DAGs designed in <b>Cloud Composer (Airflow)</b> for orchestrating ingestion, transformation, and warehousing:</p>
@@ -124,7 +124,7 @@ This project leverages multiple GCP services to build an efficient and scalable 
   <li><code>cpt_codes.py</code></li>
 </ul>
 <p>These ingestion scripts pull data from multiple sources (hospital MySQL DBs, claims data, healthcare identifiers - CPT, MS-DRG, and NPI) into the <b>landing zone</b>.</p>
-<img src="./Assets/pyspark_dag.png" alt="Data Ingestion DAG">
+<img src="./assets/pyspark_dag.png" alt="Data Ingestion DAG">
 
 <h3>2️⃣ Data Transformation DAG (BigQuery SQL)</h3>
 <ul>
@@ -133,14 +133,14 @@ This project leverages multiple GCP services to build an efficient and scalable 
   <li><code>gold.sql</code> → Analytics-ready fact & dimension tables</li>
 </ul>
 <p>These SQL scripts run in <b>BigQuery</b> to transform data into the RCM star schema.</p>
-<img src="./Assets/bq_dag.png" alt="Data Transformation DAG">
+<img src="./assets/bq_dag.png" alt="Data Transformation DAG">
 
 <h3>3️⃣ End-to-End Orchestration DAG (Parent DAG)</h3>
 <p>
   The <code>parent_dag.py</code> coordinates both ingestion (<code>pyspark_dag.py</code>) 
   and transformation (<code>bq_dag.py</code>) ensuring a complete ETL pipeline.
 </p>
-<img src="./Assets/parent_dag.png" alt="End-to-End Orchestration DAG">
+<img src="./assets/parent_dag.png" alt="End-to-End Orchestration DAG">
 
 
   <h2>🛠️ Tech Stack & Services</h2>
